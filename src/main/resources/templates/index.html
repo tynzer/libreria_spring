@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: header">
+    <body>
+  
+        <div th:replace="fragments :: navbar"></div>
+        
+        <div class="container mt-5 main">
+            <div class="row my-auto g-4 justify-content-evenly">
+                <div class="card col-lg-5 p-0 clickable-card">
+                    <a class="text-decoration-none" th:href="@{/autores}">
+                        <div class="row g-0">
+                            <div class="col-md-4 index-usuario"></div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">AUTORES</h5>
+                                    <p class="card-text">Acceda a la página de autores</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="row my-auto g-4 justify-content-evenly">
+                    <div class="card col-lg-5 p-0 clickable-card">
+                        <a class="text-decoration-none" th:href="@{/libros}">
+                            <div class="row g-0">
+                                <div class="col-md-4 index-usuario"></div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">LIBROS</h5>
+                                        <p class="card-text">Acceda a la página de libros</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card col-lg-5 p-0 clickable-card">
+                        <a class="text-decoration-none" th:href="@{/editoriales}">
+                            <div class="row g-0">
+                                <div class="col-md-4 index-mascota"></div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">EDITORIALES</h5>
+                                        <p class="card-text">Acceda a la página de editoriales</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="fragments :: foot"></div>
+        <!-- JS -->
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

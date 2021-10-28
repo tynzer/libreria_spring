@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+   <head th:replace="fragments :: header">
+    <body>
+  
+        <div th:replace="fragments :: navbar"></div>
+     
+    <h1>Listado de autores</h1>
+    <hr class="mb-5"/>
+    <div th:if="${autores.isEmpty()}">
+        <h5>Todavía no hay autores cargados. <a th:href="@{/autores/crear}">Cargar autor.</a></h5>
+    </div>
+    <div class="table-responsive" th:unless="${autores.isEmpty()}">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-secondary text-center">
+            <tr>
+                <th class="col-md-4 px-md-2" scope="col">ID</th>
+                <th class="col-md-4 px-md-2" scope="col">Nombre</th>
+                <th class="col-md-4 px-md-2" scope="col">Alta</th>
+                <th class="col-md-4 px-md-2" scope="col">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="autor : ${autores}">
+                <td class="col-md-4 px-md-2" th:text="${autor.id}"></td>
+                <td class="col-md-4 px-md-2" th:text="${autor.nombre}"></td>
+                 <td class="col-md-4 px-md-2" th:text="${autor.alta}"></td>         
+                 <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
+                    <a class="btn btn-secondary btn-sm" th:href="@{/autores/editar/__${autor.id}__}">Editar</a>                    
+                     <form method="post"   th:action="${autor.alta == true} ? @{/autores/eliminar/__${autor.id}__} : @{/autores/alta/__${autor.id}__} " >
+                                <button class="btn btn-sm " th:classappend="${autor.alta == true} ? btn-danger : btn-success" th:text="${autor.alta == true} ? 'Eliminar' : 'Habilitar' " >Eliminar</button>
+                            </form>
+                    
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+     <div th:replace="fragments :: foot"></div>
+        <!-- JS -->
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>

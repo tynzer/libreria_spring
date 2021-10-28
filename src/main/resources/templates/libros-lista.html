@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments :: header">
+    <body>
+
+        <div th:replace="fragments :: navbar"></div>
+        <h1>Listado de libros</h1>
+        <hr class="mb-5"/>
+        <div th:if="${libros.isEmpty()}">
+            <h5>Todavía no hay editoriales cargadas. <a th:href="@{/libros/crear}">Cargar libro.</a></h5>
+        </div>
+        <div class="table-responsive" th:unless="${libros.isEmpty()}">
+            <table class="table table-hover table-sm table-bordered">
+                <thead class="table-secondary text-center">
+                    <tr>
+                        <th class="col-md-4 px-md-2" scope="col">ID</th>
+                        <th class="col-md-4 px-md-2" scope="col">ISBN</th>
+                        <th class="col-md-4 px-md-2" scope="col">Titulo</th>
+                        <th class="col-md-4 px-md-2" scope="col">Año</th>
+                        <th class="col-md-4 px-md-2" scope="col">Cantidad de Ejemplares</th>
+                        <th class="col-md-4 px-md-2" scope="col">Autor</th>
+                        <th class="col-md-4 px-md-2" scope="col">Editorial</th>                        
+                        <th class="col-md-4 px-md-2" scope="col">Alta</th>                        
+                        <th class="col-md-4 px-md-2" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+
+                    <tr th:each="libro : ${libros}">
+                        <td class="col-md-4 px-md-2" th:text="${libro.id}"></td>
+                        <td class="col-md-4 px-md-2" th:text="${libro.isbn}"></td>
+                        <td class="col-md-4 px-md-2" th:text="${libro.titulo}"></td>
+                        <td class="col-md-4 px-md-2" th:text="${libro.anio}"></td>  
+                        <td class="col-md-4 px-md-2" th:text="${libro.ejemplares}"></td>                        
+                        <td class="col-md-4 px-md-2" th:text="${libro.autor?.nombre}"></td>  
+                        <td class="col-md-4 px-md-2" th:text="${libro.editorial?.nombre}"></td>  
+                        <td class="col-md-4 px-md-2" th:text="${libro.alta}"></td>       
+               <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
+                            <a class="btn btn-secondary btn-sm" th:href="@{/libros/editar/__${libro.id}__}">Editar</a>
+                            <form method="post"   th:action="${libro.alta == true} ? @{/libros/eliminar/__${libro.id}__} : @{/libros/alta/__${libro.id}__} " >
+                                <button class="btn btn-sm " th:classappend="${libro.alta == true} ? btn-danger : btn-success" type="submit" th:text="${libro.alta == true} ? 'Eliminar' : 'Habilitar' " >Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>       
+    <div th:replace="fragments :: foot"></div>
+    <!-- JS -->
+    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

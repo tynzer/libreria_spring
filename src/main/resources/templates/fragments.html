@@ -1,0 +1,75 @@
+   <head th:fragment="header">
+        <meta charset="UTF-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+        <meta content="Página de libreria de Spring Boot + Thymeleaf para el curso de Egg" name="description"/>
+        <meta content="Cristian Solís" name="author"/>
+        <title>Inicio - Libreria </title>
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+        <!-- CSS -->
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    </head>
+     
+     <nav th:fragment="navbar" class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Inicio</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-md-0 w-100">
+                <!--DROPDOWN AUTOR-->
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="dropdown-usuarios" role="button">
+                        Autores
+                    </a>
+                    <ul aria-labelledby="dropdown-usuarios" class="dropdown-menu dropdown-menu-dark">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/autores}">Mostrar todos</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/autores/crear}">Crear autor</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--DROPDOWN LIBRO-->
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="dropdown-mascotas" role="button">
+                        Libros
+                    </a>
+                    <ul aria-labelledby="dropdown-mascotas" class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" th:href="@{/libros}">Mostrar todas</a></li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/libros/crear}">Crear libro</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--DROPDOWN Eitorial-->
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       id="dropdown-mascotas" role="button">
+                        Editorial
+                    </a>
+                    <ul aria-labelledby="dropdown-mascotas" class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" th:href="@{/editoriales}">Mostrar todas</a></li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/editoriales/crear}">Crear editorial</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<footer th:fragment="foot" class="footer py-3 bg-dark fixed-bottom">
+    <div class="container d-flex justify-content-center">
+        <span class="text-muted">&copy; Martin Sola - 2021</span>
+    </div>
+</footer>
