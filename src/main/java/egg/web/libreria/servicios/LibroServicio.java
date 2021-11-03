@@ -25,35 +25,17 @@ public class LibroServicio {
 
     @Transactional
     public void crearLibro(Long isbn, String titulo, Integer anio, Integer ejemplares, String idAutor, String idEditorial) throws MiExcepcion {
-        Autor autor = new Autor();
-        Editorial editorial = new Editorial();
+       
         Libro libro = new Libro();
-
-        //    buscarAutorYEditorial(autor, editorial, idAutor, idEditorial);
-        Optional<Autor> autorOptional = autorRepositorio.findById(idAutor);
-
-        if (autorOptional.isPresent()) {
-            autor = autorOptional.get();
-        } else {
-            throw new MiExcepcion("No se encontro el autor solicitado");
-        }
-
-        Optional<Editorial> editorialOptional = editorialRepositorio.findById(idEditorial);
-        if (editorialOptional.isPresent()) {
-            editorial = editorialOptional.get();
-        } else {
-            throw new MiExcepcion("No se encontro la editorial solicitada");
-        }
-
+        //se valida que exista el autor y la editorial y setea en libro
+           setAutorYEditorial(idAutor, idEditorial, libro);
+       
         libro.setIsbn(isbn);
         libro.setTitulo(titulo);
         libro.setAnio(anio);
         libro.setEjemplares(ejemplares);
-        libro.setAlta(true);
-        libro.setAutor(autor);
-        libro.setEditorial(editorial);
-
-        libroRepositorio.save(libro);
+        libro.setAlta(true);  
+libroRepositorio.save(libro);
 
     }
 
@@ -72,16 +54,13 @@ public class LibroServicio {
     public void modificarLibro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, String idAutor, String idEditorial) throws Exception {
         try {
 
-            Autor autor = null;
-            Editorial editorial = null;
             if (!validarNombre(titulo)) {
                 throw new MiExcepcion("No es valido el nombre");
             }
-
             String isbnString = String.valueOf(isbn);
-            if (!validarISBN(isbnString)) {
-                throw new MiExcepcion("No es valido el ISBN de la editorial");
-            }
+//            if (!validarISBN(isbnString)) {
+//                throw new MiExcepcion("No es valido el ISBN de la editorial");
+//            }
 
             Optional<Libro> respuesta = libroRepositorio.findById(id);
             if (respuesta.isPresent()) {
@@ -92,24 +71,9 @@ public class LibroServicio {
                 libro.setAnio(anio);
                 //falta validar anio y cant ejemplares
                 libro.setEjemplares(ejemplares);
-                Optional<Autor> autorOptional = autorRepositorio.findById(idAutor);
+                 
+                setAutorYEditorial(idAutor, idEditorial, libro);
 
-                if (autorOptional.isPresent()) {
-                    autor = autorOptional.get();
-                } else {
-                    throw new MiExcepcion("No se encontro el autor solicitado");
-                }
-
-                Optional<Editorial> editorialOptional = editorialRepositorio.findById(idEditorial);
-                if (editorialOptional.isPresent()) {
-                    editorial = editorialOptional.get();
-                } else {
-                    throw new MiExcepcion("No se encontro la editorial solicitada");
-                }
-
-                //   buscarAutorYEditorial(autor, editorial, idAutor, idEditorial);
-                libro.setAutor(autor);
-                libro.setEditorial(editorial);
                 libroRepositorio.save(libro);
             } else {
                 throw new MiExcepcion("No se encontró el ID del libro");
@@ -166,8 +130,9 @@ public class LibroServicio {
         }
     }
 
-    public void buscarAutorYEditorial(Autor autor, Editorial editorial, String idAutor, String idEditorial) throws MiExcepcion {
-
+    public void setAutorYEditorial(String idAutor, String idEditorial, Libro libro) throws MiExcepcion {
+        Autor autor = null;
+        Editorial editorial = null;
         Optional<Autor> autorOptional = autorRepositorio.findById(idAutor);
 
         if (autorOptional.isPresent()) {
@@ -182,7 +147,8 @@ public class LibroServicio {
         } else {
             throw new MiExcepcion("No se encontro la editorial solicitada");
         }
-
+        libro.setAutor(autor);
+        libro.setEditorial(editorial);
     }
 
 }

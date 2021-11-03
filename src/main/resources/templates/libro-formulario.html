@@ -36,20 +36,31 @@
                     <div class="invalid-feedback">La cantidad de ejemplares es obligatorio</div>
                 </div>
                 <div class=" mb-3 col-xl-6">           
-                    <label for="idAutor" >Autor</label>   
-                         <select  aria-label="Elegir autor" class="form-select" id="idAutor" required th:field="*{autor}">    
-                              <option value="">Elegir autor</option>  
-                        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}" th:selected="${libro.autor != null} ? ${autor.nombre} == *{autor.nombre} : false"></option>   
-                    
-                         </select>    
+                    <label   for="idAutor" >Autor</label>   
+                    <select  aria-label="Elegir autor" class="form-select" id="idAutor" required th:field="*{autor}">    
+                        <option value="">Elegir autor</option>  
+                        <option th:each="autor : ${autores}" th:value="${autor.id}" th:text="${autor.nombre}" th:selected="${libro.autor != null} ? ${autor.nombre} == *{autor.nombre} : false"  ></option>   
+
+                    </select>    
                     <div class="invalid-feedback">El autor es obligatorio</div>
                 </div>
 
+
+                <!--
+                <div class="form-floating mb-3 col-xl-6">
+                    <select aria-label="Elegir autor" class="form-select" id="autor" th:field="*{autor}">
+                        <option selected value="">Elegir autor</option>
+                        <option th:each="autor : ${autores}" th:text="${autor.nombre}"
+                                th:value="${autor.id}"></option>
+                    </select>
+                    <label for="autor">Autor</label>
+                </div>
+                --> 
                 <div class="mb-3 col-xl-6">           
                     <label for="idEditorial" >Editorial</label>   
                     <select aria-label="Elegir editorial"   class="form-select"  id="idEditorial"  required th:field="*{editorial}" >                       
-                          <option  value="">Elegir editorial</option>
-                          <option  th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"  th:selected="${libro.editorial != null} ? ${editorial.nombre} == *{editorial.nombre} : false"  ></option>   
+                        <option  value="">Elegir editorial</option>
+                        <option  th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}"  th:selected="${libro.editorial != null} ? ${editorial.nombre} == *{editorial.nombre} : false"  ></option>   
                     </select>    
                     <div class="invalid-feedback">La editorial es obligatoria</div>
                 </div>
